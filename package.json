@@ -1,0 +1,25 @@
+{
+  "name": "szkolenie-cicd-test-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:ui": "cypress open",
+    "cy:headless": "cypress run",
+    "cy:login": "cypress run --spec \"cypress/e2e/login.cy.js\"",
+    "cy:plp": "cypress run --spec \"cypress/e2e/plp*.cy.js\"",
+    "cy:pdp": "cypress run --spec \"cypress/e2e/pdp*.cy.js\"",
+    "delete-reports": "rm cypress/reports -r || true",
+    "combine-reports": "mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/report.json",
+    "generate-report": "marge cypress/reports/report.json -f report -o cypress/reports --inline",
+    "posttest": "combine-reports && generate-report"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.7.3",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "cypress-multi-reporters": "^1.6.4",
+    "mochawesome": "^7.1.3"
+  }
+}
