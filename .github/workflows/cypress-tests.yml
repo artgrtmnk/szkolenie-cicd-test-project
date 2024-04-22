@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      checks: write
+      pull-requests: write
+
     services:
       docker:
         image: docker:19.03.12
@@ -23,3 +27,16 @@ jobs:
 
       - name: Run Cypress tests
         run: bash run_tests.sh
+        
+      - name: Publish Test Results Json
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files:
+            cypress/reports/report.json
+
+      - name: Publish Test Results Html
+        uses: actions/upload-artifact@v2
+        with: 
+          name: assets-for-download
+          path: cypress/reports/report.html
