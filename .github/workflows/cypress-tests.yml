@@ -22,6 +22,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Install deps
+        run: npm install
+
       - name: Build Cypress image
         run: docker build -t cypress-image .
 
