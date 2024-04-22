@@ -37,7 +37,7 @@ jobs:
         with:
           name: Mochaawesome reporter
           path: cypress/reports/mocha/*.json
-          reporter: jest-junit   
+          reporter: mocha-json
 
       - name: Publish Test Results Html
         uses: actions/upload-artifact@v2
