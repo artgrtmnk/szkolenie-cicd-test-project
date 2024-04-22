@@ -27,6 +27,12 @@ jobs:
 
       - name: Run Cypress tests
         run: bash run_tests.sh
+
+      - name: Combine reports into Json
+        run: npm run combine-reports
+
+      - name: Generate Html report
+        run: npm run generate-report
         
       - name: Publish Test Results Json
         uses: EnricoMi/publish-unit-test-result-action@v2
