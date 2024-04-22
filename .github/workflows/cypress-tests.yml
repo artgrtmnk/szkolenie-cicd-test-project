@@ -32,12 +32,12 @@ jobs:
         run: bash run_tests.sh
 
       - name: Publish Test Results Json
-        uses: dorny/test-reporter@v1
+        uses: phoenix-actions/test-reporting@v8
         if: always()
         with:
           name: Mochaawesome reporter
           path: cypress/reports/mocha/*.json
-          reporter: mocha-json
+          reporter: mochawesome-json
 
       - name: Publish Test Results Html
         uses: actions/upload-artifact@v2
