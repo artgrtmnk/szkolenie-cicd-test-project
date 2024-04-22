@@ -28,24 +28,27 @@ jobs:
       - name: Build Cypress image
         run: docker build -t cypress-image .
 
-      - name: Run Cypress tests
+      - name: Run Cypress tests and generate reports
         run: bash run_tests.sh
-
-      - name: Combine reports into Json
-        run: npm run combine-reports
-
-      - name: Generate Html report
-        run: npm run generate-report
         
-      - name: Publish Test Results Json
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
+      # - name: Publish Test Results Json
+      #   uses: EnricoMi/publish-unit-test-result-action@v2
+      #   if: always()
+      #   with:
+      #     files:
+      #       cypress/reports/report.json
+
+      - name: Test Report
+        uses: phoenix-actions/test-reporting@v8
+        id: test-report
+        if: success() || failure()
         with:
-          files:
-            cypress/reports/report.json
+          name: Publish Test Results Json
+          path: cypress/reports/mocha/*.json
+          reporter: mocha-json
 
       - name: Publish Test Results Html
         uses: actions/upload-artifact@v2
         with: 
-          name: assets-for-download
+          name: Html report
           path: cypress/reports/report.html
