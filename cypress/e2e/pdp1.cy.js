@@ -29,7 +29,7 @@ describe('pdp1', () => {
 
     cy.get('[data-test="shopping-cart-badge"]')
       .should('be.visible')
-      .and('contain.text', '1');
+      .and('contain.text', '5');
   });
 
   it('click on remove changes cart items number to zero', () => {
