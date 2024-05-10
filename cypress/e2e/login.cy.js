@@ -2,7 +2,7 @@
 
 describe('login', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('/')
   });
 
   it('successful', () => {
