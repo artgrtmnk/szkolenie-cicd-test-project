@@ -21,29 +21,13 @@ jobs:
         run: docker-compose build
 
       - name: Run Cypress tests
-        run: docker-compose up --exit-code-from cypress-smoke
+        run: docker-compose up --exit-code-from
   cypress-tests:
-    name: Run Cypress tests
+    name: Run test suite
     runs-on: ubuntu-latest
+    needs: cypress-smoke
     env:
       COMPOSE_FILE: .github/docker/docker-compose-tests.yml
-
-    services:
-      cypress-pdp:
-        image: cypress-image
-        build:
-          context: ../../
-          dockerfile: .github/docker/Dockerfile.tests
-        container_name: cypress-pdp
-        command: npx cypress run --spec "cypress/e2e/pdp*.cy.js"
-
-      cypress-plp:
-        image: cypress-image
-        build:
-          context: ../../
-          dockerfile: .github/docker/Dockerfile.tests
-        container_name: cypress-plp
-        command: npx cypress run --spec "cypress/e2e/plp*.cy.js"
 
     steps:
       - name: Checkout code
@@ -53,4 +37,4 @@ jobs:
         run: docker-compose build
 
       - name: Run Cypress tests
-        run: docker-compose up --exit-code-from cypress-tests
+        run: docker-compose up --exit-code-from
