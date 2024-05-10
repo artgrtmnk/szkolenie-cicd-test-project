@@ -21,7 +21,7 @@ jobs:
         run: docker-compose build
 
       - name: Run Cypress tests
-        run: docker-compose up --exit-code-from cypress-smoke
+        run: docker-compose up --exit-code-from
   cypress-tests:
     name: Run test suite
     runs-on: ubuntu-latest
@@ -37,4 +37,4 @@ jobs:
         run: docker-compose build
 
       - name: Run Cypress tests
-        run: docker-compose up --exit-code-from cypress-e2e
+        run: docker-compose up --exit-code-from
