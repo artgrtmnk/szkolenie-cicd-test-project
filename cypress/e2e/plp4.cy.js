@@ -1,12 +1,12 @@
 /// <reference types="cypress" />
 
-describe('plp', () => {
+describe('plp4', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.login();
   });
 
-  it.only('contains 6 items in list', () => {
+  it('contains 6 items in list', () => {
     cy.get('[data-test="inventory-item"]')
       .should('have.length', 6)
       .each((listItem) => {
@@ -20,7 +20,7 @@ describe('plp', () => {
       });
   });
 
-  it.only('click on item leads to the pdp page', () => {
+  it('click on item leads to the pdp page', () => {
     const random = Cypress._.random(0, 5);
     cy.get('[data-test="inventory-item-name"]')
       .eq(random)

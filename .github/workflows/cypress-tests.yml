@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: Build Cypress image
-        run: docker build -t cypress-image .github/docker/Dockerfile.tests
+        run: docker build -t cypress-image -f ./.github/docker/Dockerfile.tests .
 
       - name: Run Cypress tests and generate reports
         run: bash run_tests.sh

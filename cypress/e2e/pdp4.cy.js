@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('pdp', () => {
+describe('pdp4', () => {
   beforeEach(() => {
     const random = Cypress._.random(0, 5);
 
