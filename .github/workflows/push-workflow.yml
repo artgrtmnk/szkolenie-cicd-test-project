@@ -1,0 +1,24 @@
+name: Push Workflow - Lint Checks
+on:
+  push:
+    branches:
+      - master
+      - main
+      - 'feature/**'
+
+jobs:
+  test:
+    name: Run test suite
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: .github/docker/docker-compose-lint.yml
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: docker-compose build
+
+      - name: Run Lint check
+        run: docker-compose up --exit-code-from lint-check

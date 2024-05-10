@@ -1,0 +1,40 @@
+name: Pull Request Workflow - Cypress Tests
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+      - 'feature/**'
+
+jobs:
+  cypress-smoke:
+    name: Run smoke test
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: .github/docker/docker-compose-smoke.yml
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: docker-compose build
+
+      - name: Run Cypress tests
+        run: docker-compose up --exit-code-from cypress-smoke
+  cypress-tests:
+    name: Run test suite
+    runs-on: ubuntu-latest
+    needs: cypress-smoke
+    env:
+      COMPOSE_FILE: .github/docker/docker-compose-tests.yml
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: docker-compose build
+
+      - name: Run Cypress tests
+        run: docker-compose up --exit-code-from cypress-e2e

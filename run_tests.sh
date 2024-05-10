@@ -53,4 +53,3 @@ wait "${PIDS[@]}"
 
 # Report generation
 npm run combine-reports && npm run generate-report
-echo "General report has been generated."
