@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Master Pipeline - Cypress Tests
 
 on:
   push:
